@@ -1,0 +1,41 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model fitness_user {
+  id          Int                           @id @default(autoincrement())
+  firstName   String                        @db.VarChar(256)
+  lastName    String                        @db.VarChar(256)
+  phoneNumber String                        @unique @db.VarChar(256)
+  totalScore  Int                           @db.Int
+  workouts    fitness_workout_log[]
+  suggestions fitness_workout_suggestions[]
+}
+
+model fitness_workout_log {
+  id             Int          @id @default(autoincrement())
+  date           DateTime     @db.DateTime
+  description    String       @db.LongText
+  minutes        Int          @db.Int
+  score          Int          @db.Int
+  type           String       @db.VarChar(256)
+  user           fitness_user @relation(fields: [fitness_userId], references: [id])
+  fitness_userId Int
+}
+
+model fitness_workout_suggestions {
+  id             Int          @id @default(autoincrement())
+  description    String       @db.LongText
+  difficulty     String       @db.VarChar(100)
+  type           String       @db.VarChar(256)
+  user           fitness_user @relation(fields: [fitness_userId], references: [id])
+  fitness_userId Int
+}
