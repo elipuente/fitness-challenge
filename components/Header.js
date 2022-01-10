@@ -7,7 +7,7 @@ import {
   ViewListIcon,
 } from "@heroicons/react/outline";
 
-import puenteFitnessWebsite from "../public/logos/puenteFitnessChallenge.svg";
+import puenteFitnessChallenge from "../public/logos/puenteFitnessChallenge.webp";
 import { useUser } from "../utils/user";
 import Menu from "./Menu";
 import MobileMenu from "./MobileMenu";
@@ -54,7 +54,11 @@ const Header = () => {
             <a href="#">
               <span className="sr-only">Workflow</span>
               <div className="w-64">
-                <Image className="w-64" src={puenteFitnessWebsite} alt="" />
+                <Image
+                  className="w-64"
+                  src={puenteFitnessChallenge}
+                  alt="Puente Wedding Fitness Challenge logo"
+                />
               </div>
             </a>
           </div>

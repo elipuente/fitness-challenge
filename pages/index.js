@@ -45,12 +45,11 @@ const Home = () => {
                 )}
               </div>
               <div className="mt-3 sm:mt-0 sm:ml-3">
-                <a
-                  href="/leaderboard"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-emerald-700 bg-emerald-100 hover:bg-emerald-200 md:py-4 md:text-lg md:px-10"
-                >
-                  View Leaderboard
-                </a>
+                <Link href="/leaderboard">
+                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-emerald-700 bg-emerald-100 hover:bg-emerald-200 md:py-4 md:text-lg md:px-10">
+                    View Leaderboard
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
