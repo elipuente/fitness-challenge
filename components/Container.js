@@ -30,18 +30,6 @@ const Container = (props) => {
           rel="apple-touch-icon"
           sizes="200x200"
         />
-        <link
-          href="/favicons/favicon-32x32.png"
-          rel="icon"
-          sizes="32x32"
-          type="image/png"
-        />
-        <link
-          href="/favicons/favicon-16x16.png"
-          rel="icon"
-          sizes="16x16"
-          type="image/png"
-        />
         <meta
           property="og:url"
           content={`https://fitness.puentewedding.com${router.asPath}`}

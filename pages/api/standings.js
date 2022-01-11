@@ -19,6 +19,7 @@ const handler = async (req, res) => {
     const allUsers = await getCurrentStandings(prisma);
     res.status(200).json(allUsers);
   } catch (err) {
+    console.error(`Error getting current standings. `, err);
     res.status(500).json({
       error: true,
       message:
