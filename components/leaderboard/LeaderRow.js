@@ -7,7 +7,7 @@ const LeaderRow = ({ person, index }) => {
 
   return signedIn && user.phoneNumber === person.phoneNumber ? (
     <tr className="flex w-full py-3 bg-gray-100" key={index}>
-      <td className="p-4 w-1/4">
+      <td className="p-4 w-1/5">
         <div className="font-medium text-gray-900">{index + 1}</div>
       </td>
       <td className=" p-4 w-1/4">
@@ -23,8 +23,8 @@ const LeaderRow = ({ person, index }) => {
       </td>
     </tr>
   ) : (
-    <tr className="flex w-full py-3" key={index}>
-      <td className="p-4 w-1/4">
+    <tr className="flex w-full justify-center py-3" key={index}>
+      <td className="p-4 w-1/5">
         <div className="font-medium text-gray-900">{index + 1}</div>
       </td>
       <td className=" p-4 w-1/4">
