@@ -8,7 +8,10 @@ const WorkoutCard = ({ workout, recentAdd }) => (
       {recentAdd && (
         <span className="flex flex-row h-3 w-3 self-end -mt-1 -mr-1 absolute">
           <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          <span
+            className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"
+            title="Recently added workout! 🎉"
+          ></span>
         </span>
       )}
       <div className="px-6 py-4">

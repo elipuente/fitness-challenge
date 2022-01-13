@@ -58,8 +58,7 @@ const SignInForm = () => {
       setAccessToken(res.accessToken);
       router.push("/leaderboard");
     } else {
-      console.log("Invalid login, please try again.");
-      setError(res.error);
+      setError(res.message);
     }
   };
 

@@ -26,7 +26,7 @@ const Leaderboard = () => {
 
   return (
     <Container title="Leaderboard">
-      <div className="flex flex-col md:flex-row justify-center sm:justify-between mt-10 px-4 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
+      <div className="flex flex-col lg:flex-row justify-center sm:justify-between mt-10 px-4 sm:mt-12 lg:mt-20 lg:px-8 my-6 mb-20 h-auto">
         <div className="text-left justify-start">
           <h1 className="font-extrabold text-emerald-600 text-5xl tracking-tight block xl:inline sm:text-6xl md:text-7xl">
             Leaderboard

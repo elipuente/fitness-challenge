@@ -54,14 +54,14 @@ const Home = () => {
             </div>
           </div>
           <div className="flex flex-row self-center">
-            <div className="h-[350px] w-[350px] bg-indigo-500 rounded-lg -rotate-6 absolute"></div>
+            <div className="h-[350px] w-[350px] rainbow-gradient rounded-lg -rotate-6 absolute"></div>
             <Image
               width={350}
               height={350}
               placeholder="blur"
               className="rounded-lg"
               src={bikingInCabo}
-              alt={"Hannah (left) and Eli (right) in kayaks on a lake."}
+              alt={"Hannah and Eli biking through Los Cabos, Mexico."}
             />
           </div>
         </div>

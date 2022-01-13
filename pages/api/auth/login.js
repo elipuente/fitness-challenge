@@ -7,8 +7,8 @@ const compareIgnoreCase = (c) =>
 
 const createUsername = (first, last) => first.concat(last).toLowerCase();
 
-const getUser = async (prisma, phoneNumber) =>
-  await prisma.fitness_user.findUnique({
+const getUser = (prisma, phoneNumber) =>
+  prisma.fitness_user.findUnique({
     where: {
       phoneNumber,
     },
@@ -31,7 +31,7 @@ const handler = async (req, res) => {
   const user = await getUser(prisma, number);
 
   if (!(user && verifyUser(user, first, last))) {
-    return res.status(200).json({ error: "Invalid login" });
+    return res.status(200).json({ error: true, message: "Invalid login" });
   }
 
   const username = createUsername(first, last);

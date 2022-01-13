@@ -1,7 +1,7 @@
 import prisma from "../../lib/prisma";
 
-const getCurrentStandings = async (prisma) =>
-  await prisma.fitness_user.groupBy({
+const getCurrentStandings = (prisma) =>
+  prisma.fitness_user.groupBy({
     by: ["totalScore", "firstName", "lastName", "phoneNumber"],
     orderBy: [
       {
@@ -14,12 +14,14 @@ const getCurrentStandings = async (prisma) =>
   });
 
 const handler = async (req, res) => {
-  // const prisma = new PrismaClient();
   try {
     const allUsers = await getCurrentStandings(prisma);
     res.status(200).json(allUsers);
   } catch (err) {
-    console.error(`Error getting current standings. `, err);
+    console.error(
+      `Error: An error occurred retrieving current standings. `,
+      err
+    );
     res.status(500).json({
       error: true,
       message:
