@@ -1,7 +1,7 @@
 import prisma from "../../lib/prisma";
 
-const verifyUser = async (phoneNumber) =>
-  await prisma.fitness_user.findUnique({
+const verifyUser = (phoneNumber) =>
+  prisma.fitness_user.findUnique({
     where: {
       phoneNumber,
     },
@@ -11,8 +11,8 @@ const verifyUser = async (phoneNumber) =>
     },
   });
 
-const getAllWorkoutsForUser = async (phoneNumber) =>
-  await prisma.fitness_workout_log.findMany({
+const getAllWorkoutsForUser = (phoneNumber) =>
+  prisma.fitness_workout_log.findMany({
     where: {
       user: {
         phoneNumber,

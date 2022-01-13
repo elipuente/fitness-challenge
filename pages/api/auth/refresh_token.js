@@ -4,8 +4,8 @@ import { setCookie, parseCookie } from "../../../utils/cookie";
 
 const createUsername = (first, last) => first.concat(last).toLowerCase();
 
-const getUserByIdAndNumber = async (prisma, id, phoneNumber) =>
-  await prisma.fitness_user.findMany({
+const getUserByIdAndNumber = (prisma, id, phoneNumber) =>
+  prisma.fitness_user.findMany({
     where: {
       AND: [
         {
@@ -37,7 +37,10 @@ const handler = async (req, res) => {
   try {
     userInformation = tokenUtils.verifyRefreshToken(token);
   } catch (err) {
-    console.log(err);
+    console.error(
+      `Error: Unable to verify refresh token (token: ${token}). `,
+      err
+    );
     return res.status(200).json({ signedIn: false, accessToken: "" });
   }
 

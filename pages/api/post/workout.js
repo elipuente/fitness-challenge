@@ -1,7 +1,6 @@
 import prisma from "../../../lib/prisma";
 import { verifyRefreshToken } from "../../../utils/token";
 import { parseCookie } from "../../../utils/cookie";
-import { PrismaClient } from "@prisma/client";
 
 const calculateScore = ({ minutes, ppmValue }) =>
   Math.round(minutes * ppmValue);
@@ -9,8 +8,8 @@ const calculateScore = ({ minutes, ppmValue }) =>
 const calculateTotalScore = (previousTotalScore, score) =>
   previousTotalScore + score;
 
-const getLatestTotalScore = async ({ id }) =>
-  await prisma.fitness_user.findUnique({
+const getLatestTotalScore = ({ id }) =>
+  prisma.fitness_user.findUnique({
     where: {
       id,
     },
@@ -19,8 +18,8 @@ const getLatestTotalScore = async ({ id }) =>
     },
   });
 
-const saveWorkout = async (user, workout) =>
-  await prisma.fitness_workout_log.create({
+const saveWorkout = (user, workout) =>
+  prisma.fitness_workout_log.create({
     data: {
       fitness_userId: user.id,
       date: new Date().toISOString(),
@@ -36,8 +35,8 @@ const saveWorkout = async (user, workout) =>
     },
   });
 
-const updateUser = async (user, totalScore) =>
-  await prisma.fitness_user.update({
+const updateUser = (user, totalScore) =>
+  prisma.fitness_user.update({
     where: {
       id: user.id,
     },
@@ -50,8 +49,8 @@ const updateUser = async (user, totalScore) =>
     },
   });
 
-const rollbackWorkout = async ({ id }) =>
-  await prisma.fitness_workout_log.delete({
+const rollbackWorkout = ({ id }) =>
+  prisma.fitness_workout_log.delete({
     where: {
       id,
     },
@@ -97,8 +96,6 @@ const handler = async (req, res) => {
   if (!(user.id === userToken.id && user.phoneNumber === userToken.ph)) {
     return unableToVerify(res);
   }
-
-  const prisma = new PrismaClient();
 
   try {
     latestTotalScore = await getLatestTotalScore(user);
@@ -148,14 +145,12 @@ const handler = async (req, res) => {
     return genericError(res);
   }
 
-  return res
-    .status(200)
-    .json({
-      success: true,
-      error: false,
-      updatedUser,
-      addedWorkout: { id: savedWorkout.id },
-    });
+  return res.status(200).json({
+    success: true,
+    error: false,
+    updatedUser,
+    addedWorkout: { id: savedWorkout.id },
+  });
 };
 
 export default handler;
