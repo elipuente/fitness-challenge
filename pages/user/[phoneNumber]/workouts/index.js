@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 import Container from "../../../../components/Container";
 import Errors from "../../../../components/Errors";
-import Loading from "../../../../components/Loading";
 import WorkoutCard from "../../../../components/workouts/WorkoutCard";
+import WorkoutCardSkeleton from "../../../../components/workouts/WorkoutCardSkeleton";
 import WorkoutError from "../../../../components/workouts/WorkoutError";
 import { fetcher } from "../../../../utils/fetcher";
 import { useUser } from "../../../../utils/user";
@@ -18,7 +18,31 @@ const Workouts = () => {
   const { data, error } = useSWR(`/api/workouts?user=${phoneNumber}`, fetcher);
 
   if (!data) {
-    return <Loading text="Loading workouts..." />;
+    return (
+      <Container title={`Loading Workouts`}>
+        <div className="flex flex-col justify-center mt-10 px-4 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
+          <div className="text-left justify-start">
+            <h1 className="font-extrabold text-emerald-600 text-5xl tracking-tight block xl:inline sm:text-6xl md:text-7xl">
+              {isSignedInUser ? (
+                "Your"
+              ) : (
+                <div className="inline-block h-10 md:h-14 bg-gray-300 w-56 animate-pulse rounded-lg"></div>
+              )}{" "}
+              Workouts
+            </h1>
+            <h1 className="font-extrabold block text-2xl md:text-3xl text-gray-900">
+              Current Score:{" "}
+              <div className="inline-block h-8 md:h-10 bg-gray-300 w-14 animate-pulse rounded-lg align-bottom"></div>
+            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+              {[...Array(8)].map((_, index) => (
+                <WorkoutCardSkeleton key={index} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </Container>
+    );
   }
 
   if (error) {

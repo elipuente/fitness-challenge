@@ -174,7 +174,7 @@ const AddWorkoutForm = () => {
                 required
                 hidden
                 min={1}
-                max={280}
+                max={240}
                 minLength={1}
                 maxLength={3}
                 className="appearance-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm mb-2 rounded-md w-[32%]"

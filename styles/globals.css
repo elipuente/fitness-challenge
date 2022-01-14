@@ -102,3 +102,19 @@ table {
     background-position: 0% 82%;
   }
 }
+
+.animate-pulse-sm {
+  animation: pulse-sm 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-sm {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
