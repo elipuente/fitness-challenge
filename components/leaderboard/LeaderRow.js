@@ -6,7 +6,7 @@ const LeaderRow = ({ person, index }) => {
   const { user, signedIn } = useUser();
 
   return signedIn && user.phoneNumber === person.phoneNumber ? (
-    <tr className="flex w-full py-3 bg-gray-100" key={index}>
+    <tr className="flex w-full justify-center py-3 bg-gray-100" key={index}>
       <td className="p-4 w-1/5">
         <div className="font-medium text-gray-900">{index + 1}</div>
       </td>

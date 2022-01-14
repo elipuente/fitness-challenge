@@ -1,4 +1,5 @@
 import LeaderRow from "./LeaderRow";
+import LoadingRowsSkeleton from "./LoadingRowsSkeleton";
 
 const LeaderTable = ({ data }) => {
   return (
@@ -23,9 +24,13 @@ const LeaderTable = ({ data }) => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 flex flex-col items-center justify-between overflow-y-scroll w-full max-h-80">
-              {data.map((person, index) => (
-                <LeaderRow person={person} index={index} key={index} />
-              ))}
+              {data ? (
+                data.map((person, index) => (
+                  <LeaderRow person={person} index={index} key={index} />
+                ))
+              ) : (
+                <LoadingRowsSkeleton rows={5} />
+              )}
             </tbody>
           </table>
         </div>
