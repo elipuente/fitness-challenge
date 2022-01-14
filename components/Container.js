@@ -1,34 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-import Loading from "./Loading";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useUser } from "../utils/user";
-import { setAccessToken } from "../utils/token";
 
 const Container = (props) => {
   const { children, ...customMeta } = props;
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const { signedIn } = useUser();
-
-  useEffect(() => {
-    if (signedIn) {
-      fetch("/api/auth/refresh_token", { method: "POST" }).then(async (res) => {
-        const data = await res.json();
-
-        setAccessToken(data?.accessToken);
-      });
-    }
-
-    setLoading(false);
-  }, [signedIn]);
-
-  if (loading) {
-    return <Loading text={"Loading Fitness Competition..."} />;
-  }
 
   const meta = {
     title: "",
