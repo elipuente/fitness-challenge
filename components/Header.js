@@ -54,7 +54,6 @@ const Header = () => {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
               <a>
-                <span className="sr-only">Workflow</span>
                 <div className="w-64">
                   <Image
                     className="w-64"

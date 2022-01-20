@@ -22,8 +22,8 @@ const getUser = (prisma, phoneNumber) =>
   });
 
 const verifyUser = (user, first, last) =>
-  compareIgnoreCase([user?.firstName, first]) &&
-  compareIgnoreCase([user?.lastName, last]);
+  compareIgnoreCase([user?.firstName, first.trim()]) &&
+  compareIgnoreCase([user?.lastName, last.trim()]);
 
 const handler = async (req, res) => {
   const { first, last, number } = req.body;
