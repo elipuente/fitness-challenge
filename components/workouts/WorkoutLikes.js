@@ -46,8 +46,6 @@ const WorkoutLikes = ({ totalLikes, likes, workoutId }) => {
   const [loading, setLoading] = useState(false);
   const [matchingUserLike, setMatchingUserLike] = useState();
 
-  console.log("likes", likes);
-
   useEffect(() => {
     if (signedIn && totalLikes) {
       const matchingLike = likes.filter(
