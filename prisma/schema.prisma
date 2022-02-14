@@ -11,7 +11,7 @@ datasource db {
 }
 
 model fitness_user {
-  id            Int                           @id @default(autoincrement())
+  id            String                        @id @default(uuid())
   firstName     String                        @db.VarChar(256)
   lastName      String                        @db.VarChar(256)
   phoneNumber   String                        @unique @db.VarChar(256)
@@ -23,7 +23,7 @@ model fitness_user {
 }
 
 model fitness_workout_log {
-  id             Int                       @id @default(autoincrement())
+  id             String                    @id @default(uuid())
   date           DateTime                  @db.DateTime
   description    String                    @db.LongText
   minutes        Int                       @db.Int
@@ -34,39 +34,39 @@ model fitness_workout_log {
   image          fitness_workout_image?
   comments       fitness_workout_comment[]
   likes          fitness_workout_likes[]
-  fitness_userId Int
+  fitness_userId String
 }
 
 model fitness_workout_suggestions {
-  id             Int          @id @default(autoincrement())
+  id             String       @id @default(uuid())
   description    String       @db.LongText
   difficulty     String       @db.VarChar(100)
   type           String       @db.VarChar(256)
   user           fitness_user @relation(fields: [fitness_userId], references: [id])
-  fitness_userId Int
+  fitness_userId String
 }
 
 model fitness_workout_image {
-  id                   Int                 @id @default(autoincrement())
+  id                   String              @id @default(uuid())
   imageUrl             String              @db.VarChar(256)
   caption              String              @db.LongText
   workout              fitness_workout_log @relation(fields: [fitness_workoutLogId], references: [id])
-  fitness_workoutLogId Int
+  fitness_workoutLogId String
 }
 
 model fitness_workout_comment {
-  id                   Int                 @id @default(autoincrement())
+  id                   String              @id @default(uuid())
   comment              String?             @db.LongText
   workout              fitness_workout_log @relation(fields: [fitness_workoutLogId], references: [id])
-  fitness_workoutLogId Int
+  fitness_workoutLogId String
   user                 fitness_user        @relation(fields: [fitness_userId], references: [id])
-  fitness_userId       Int
+  fitness_userId       String
 }
 
 model fitness_workout_likes {
   id                   String              @id @default(uuid())
   workout              fitness_workout_log @relation(fields: [fitness_workoutLogId], references: [id])
-  fitness_workoutLogId Int
+  fitness_workoutLogId String
   user                 fitness_user        @relation(fields: [fitness_userId], references: [id])
-  fitness_userId       Int
+  fitness_userId       String
 }

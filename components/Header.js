@@ -27,14 +27,14 @@ const Header = () => {
     {
       name: "Add Workout",
       description: "Add a workout to increase your score.",
-      href: signedIn ? `/user/${user.phoneNumber}/workouts/add` : "",
+      href: signedIn ? `/user/${user.id}/workouts/add` : "",
       icon: PlusCircleIcon,
       disabled: !signedIn,
     },
     {
       name: "View Previous Workouts",
       description: "View your previously entered workouts.",
-      href: signedIn ? `/user/${user.phoneNumber}/workouts/` : "",
+      href: signedIn ? `/user/${user.id}/workouts/` : "",
       icon: ViewListIcon,
       disabled: !signedIn,
     },

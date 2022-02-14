@@ -46,13 +46,15 @@ const WorkoutLikes = ({ totalLikes, likes, workoutId }) => {
   const [loading, setLoading] = useState(false);
   const [matchingUserLike, setMatchingUserLike] = useState();
 
+  console.log("likes", likes);
+
   useEffect(() => {
     if (signedIn && totalLikes) {
       const matchingLike = likes.filter(
         ({ fitness_userId }) => fitness_userId === user.id
       );
       setMatchingUserLike(matchingLike);
-      setUserLikedWorkout(Boolean(matchingLike));
+      setUserLikedWorkout(Boolean(matchingLike.length));
     }
   }, [signedIn, totalLikes, likes, user?.id]);
 
@@ -72,6 +74,12 @@ const WorkoutLikes = ({ totalLikes, likes, workoutId }) => {
       }).then((data) => data.json());
 
       if (res?.success) {
+        likes.push({
+          user: {
+            firstName: user.firstName,
+          },
+          ...res.newLike,
+        });
         setUserLikedWorkout(true);
         setMatchingUserLike([res.newLike]);
         setLoading(false);
@@ -97,6 +105,7 @@ const WorkoutLikes = ({ totalLikes, likes, workoutId }) => {
     }).then((data) => data.json());
 
     if (res?.success) {
+      likes = likes.filter(({ id }) => id !== matchingUserLike[0].id);
       setUserLikedWorkout(false);
       setMatchingUserLike(undefined);
     }

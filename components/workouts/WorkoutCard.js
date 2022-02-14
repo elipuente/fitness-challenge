@@ -10,7 +10,7 @@ const formatDate = (date) =>
 const WorkoutCard = ({ workout, recentAdd }) => (
   <div className="flex flex-col justify-between rounded shadow-lg bg-white px-4 py-4">
     {recentAdd && (
-      <span className="flex flex-row h-3 w-3 self-end -mt-1 -mr-1 absolute">
+      <span className="flex flex-row h-3 w-3 self-end -mt-5 -mr-5 absolute">
         <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-emerald-400 opacity-75"></span>
         <span
           className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"

@@ -26,6 +26,6 @@ const useProvideUser = () => {
   return {
     user,
     setUser,
-    signedIn
+    signedIn,
   };
 };

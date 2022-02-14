@@ -6,14 +6,14 @@ import { useUser } from "../../../../utils/user";
 
 const Add = () => {
   const router = useRouter();
-  const { phoneNumber } = router.query;
+  const { id } = router.query;
   const { user, signedIn } = useUser();
 
   if (!signedIn) {
     router.push("/401");
   }
 
-  const isSignedInUser = signedIn && phoneNumber === user.phoneNumber;
+  const isSignedInUser = signedIn && id === user.id;
 
   if (!isSignedInUser) {
     router.push("/404");
