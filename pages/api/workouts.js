@@ -1,9 +1,9 @@
 import prisma from "../../lib/prisma";
 
-const verifyUser = (phoneNumber) =>
+const verifyUser = (id) =>
   prisma.fitness_user.findUnique({
     where: {
-      phoneNumber,
+      id,
     },
     select: {
       firstName: true,
@@ -11,11 +11,11 @@ const verifyUser = (phoneNumber) =>
     },
   });
 
-const getAllWorkoutsForUser = (phoneNumber) =>
+const getAllWorkoutsForUser = (id) =>
   prisma.fitness_workout_log.findMany({
     where: {
       user: {
-        phoneNumber,
+        id,
       },
     },
     include: {
@@ -37,15 +37,15 @@ const getAllWorkoutsForUser = (phoneNumber) =>
   });
 
 const handler = async (req, res) => {
-  const { user: phoneNumber } = req.query;
+  const { user: id } = req.query;
 
-  if (!phoneNumber) {
+  if (!id) {
     return res
       .status(500)
       .json({ error: true, message: "No user information provided." });
   }
 
-  const user = await verifyUser(phoneNumber);
+  const user = await verifyUser(id);
 
   if (!user) {
     return res.status(404).json({ error: true, message: "User not found." });
@@ -53,7 +53,7 @@ const handler = async (req, res) => {
 
   const { firstName, totalScore } = user;
 
-  const workouts = await getAllWorkoutsForUser(phoneNumber);
+  const workouts = await getAllWorkoutsForUser(id);
 
   return res.status(200).json({ firstName, totalScore, workouts });
 };

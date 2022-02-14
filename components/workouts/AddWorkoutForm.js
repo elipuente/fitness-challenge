@@ -55,7 +55,7 @@ const AddWorkoutForm = () => {
       });
 
       router.push(
-        `/user/${user.phoneNumber}/workouts?addedWorkout=${res.addedWorkout.id}`
+        `/user/${user.id}/workouts?addedWorkout=${res.addedWorkout.id}`
       );
     }
   };

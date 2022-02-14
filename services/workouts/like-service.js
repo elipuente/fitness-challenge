@@ -86,8 +86,6 @@ export const likeWorkout = async (workoutId, userId, res) => {
 };
 
 export const unlikeWorkout = async (workoutId, likeId, res) => {
-  let newTotalLikeCount;
-
   try {
     await deleteLikeRecord(likeId);
   } catch (err) {
@@ -100,7 +98,7 @@ export const unlikeWorkout = async (workoutId, likeId, res) => {
   }
 
   try {
-    newTotalLikeCount = await decrementLikeCount(workoutId);
+    await decrementLikeCount(workoutId);
   } catch (err) {
     console.error(
       `Error: An error occurred while decrementing the current like total for workout (workoutId: ${workoutId}).`,

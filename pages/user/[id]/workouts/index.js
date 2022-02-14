@@ -12,10 +12,10 @@ import { useUser } from "../../../../utils/user";
 
 const Workouts = () => {
   const router = useRouter();
-  const { phoneNumber, addedWorkout } = router.query;
+  const { id, addedWorkout } = router.query;
   const { user, signedIn } = useUser();
 
-  const { data, error } = useSWR(`/api/workouts?user=${phoneNumber}`, fetcher);
+  const { data, error } = useSWR(`/api/workouts?user=${id}`, fetcher);
 
   if (!data) {
     return (
@@ -53,7 +53,7 @@ const Workouts = () => {
     return <WorkoutError error={data.message} />;
   }
 
-  const isSignedInUser = signedIn && phoneNumber === user.phoneNumber;
+  const isSignedInUser = signedIn && id === user.id;
 
   const { firstName, totalScore, workouts } = data;
 
@@ -72,7 +72,7 @@ const Workouts = () => {
               {workouts.map((workout, index) => (
                 <WorkoutCard
                   workout={workout}
-                  recentAdd={Number(addedWorkout) === workout.id}
+                  recentAdd={addedWorkout === workout.id}
                   key={index}
                 />
               ))}
@@ -80,7 +80,7 @@ const Workouts = () => {
           ) : isSignedInUser ? (
             <p className="mt-6">
               You don&apos;t have any workouts yet. Get started by{" "}
-              <Link href={`/user/${phoneNumber}/workouts/add`}>
+              <Link href={`/user/${id}/workouts/add`}>
                 <a className="text-emerald-600">adding a workout</a>
               </Link>
               .

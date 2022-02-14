@@ -2,7 +2,7 @@ import prisma from "../../lib/prisma";
 
 const getCurrentStandings = (prisma) =>
   prisma.fitness_user.groupBy({
-    by: ["totalScore", "firstName", "lastName", "phoneNumber"],
+    by: ["totalScore", "firstName", "lastName", "id"],
     orderBy: [
       {
         totalScore: "desc",
