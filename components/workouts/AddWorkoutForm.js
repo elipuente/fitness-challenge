@@ -7,7 +7,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 import LoadingSpinnerWhite from "../LoadingSpinnerWhite";
 import { useUser } from "../../utils/user";
-import { workouts } from "../../enums/workoutTypes";
+import { WORKOUTS } from "../../enums/workoutTypes";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -110,7 +110,7 @@ const AddWorkoutForm = () => {
                           className="absolute z-10 mt-1 w-[75vw] sm:w-full bg-white shadow-lg sm:max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                           aria-required="true"
                         >
-                          {workouts.map((workout) => (
+                          {WORKOUTS.map((workout) => (
                             <Listbox.Option
                               key={workout.name}
                               className={({ active }) =>

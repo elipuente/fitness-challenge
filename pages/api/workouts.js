@@ -18,6 +18,19 @@ const getAllWorkoutsForUser = (phoneNumber) =>
         phoneNumber,
       },
     },
+    include: {
+      likes: {
+        select: {
+          id: true,
+          fitness_userId: true,
+          user: {
+            select: {
+              firstName: true,
+            },
+          },
+        },
+      },
+    },
     orderBy: {
       date: "desc",
     },

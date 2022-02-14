@@ -34,8 +34,8 @@ const Workouts = () => {
               Current Score:{" "}
               <div className="inline-block h-8 md:h-10 bg-gray-300 w-14 animate-pulse rounded-lg align-bottom"></div>
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
-              {[...Array(8)].map((_, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+              {[...Array(6)].map((_, index) => (
                 <WorkoutCardSkeleton key={index} />
               ))}
             </div>
@@ -68,7 +68,7 @@ const Workouts = () => {
             Current Score: {totalScore}
           </h1>
           {workouts.length ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
               {workouts.map((workout, index) => (
                 <WorkoutCard
                   workout={workout}
