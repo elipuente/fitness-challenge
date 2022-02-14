@@ -1,6 +1,6 @@
 import prisma from "../../../lib/prisma";
-import { verifyRefreshToken } from "../../../utils/token";
-import { parseCookie } from "../../../utils/cookie";
+import { authUser } from "../../../services/auth/auth-service";
+import { unableToVerify, genericError } from "../helpers";
 
 const calculateScore = ({ minutes, ppmValue }) =>
   Math.round(minutes * ppmValue);
@@ -56,21 +56,8 @@ const rollbackWorkout = ({ id }) =>
     },
   });
 
-const unableToVerify = (res) =>
-  res.status(403).json({
-    error: true,
-    message:
-      "Unable to verify user information. Try signing out and signing in again.",
-  });
-
-const genericError = (res) =>
-  res.status(500).json({
-    error: true,
-    message: "An error occurred. Please try again later.",
-  });
-
 const handler = async (req, res) => {
-  let userToken, latestTotalScore, savedWorkout, updatedUser;
+  let latestTotalScore, savedWorkout, updatedUser;
 
   if (req.method !== "POST") {
     return res.status(400);
@@ -78,22 +65,7 @@ const handler = async (req, res) => {
 
   const { workout, user } = req.body;
 
-  const { __rfx: token } = parseCookie(req);
-
-  if (!token) {
-    return res.status(401).json({
-      error: true,
-      message: "Please sign in and try again.",
-    });
-  }
-
-  try {
-    userToken = verifyRefreshToken(token);
-  } catch (err) {
-    return unableToVerify(res);
-  }
-
-  if (!(user.id === userToken.id && user.phoneNumber === userToken.ph)) {
+  if (!authUser(user, req).verifiedUser) {
     return unableToVerify(res);
   }
 

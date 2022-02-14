@@ -1,4 +1,4 @@
-export const workouts = [
+export const WORKOUTS = [
   {
     name: "Walking",
     ppmValue: 0.5,
