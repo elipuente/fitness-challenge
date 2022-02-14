@@ -57,7 +57,7 @@ const WorkoutLikes = ({ totalLikes, likes, workoutId }) => {
   }, [signedIn, totalLikes, likes, user?.id]);
 
   const handleLikeRequest = async () => {
-    if (signedIn || !loading) {
+    if (signedIn && !loading) {
       setLoading(true);
       const res = await fetch("/api/post/like", {
         method: "POST",
