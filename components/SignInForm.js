@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { useUser } from "../utils/user";
 import { setAccessToken } from "../utils/token";
+import LoadingSpinnerWhite from "./LoadingSpinnerWhite";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const SignInForm = () => {
 
   const { user, setUser } = useUser();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (user) {
     const { firstName } = user;
@@ -41,6 +43,7 @@ const SignInForm = () => {
 
   const handleSignInRequest = async ({ first, last, number }) => {
     setError("");
+    setLoading(true);
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: {
@@ -56,8 +59,10 @@ const SignInForm = () => {
     if (res?.accessToken) {
       setUser(res.user);
       setAccessToken(res.accessToken);
+      setLoading(false);
       router.push("/leaderboard");
     } else {
+      setLoading(false);
       setError(res.message);
     }
   };
@@ -137,10 +142,17 @@ const SignInForm = () => {
           <div className="flex justify-end">
             <button
               type="submit"
+              disabled={loading}
               className="group relative flex justify-end py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
             >
               <span className="absolute inset-y-0 flex items-center pl-3"></span>
-              Sign in
+              {loading ? (
+                <>
+                  <LoadingSpinnerWhite /> {"Signing in..."}
+                </>
+              ) : (
+                "Sign in"
+              )}
             </button>
           </div>
         </form>

@@ -1,4 +1,5 @@
 import prisma from "../../../lib/prisma";
+import cloudinary from "../../../lib/cloudinary";
 import { authUser } from "../../../services/auth/auth-service";
 import { unableToVerify, genericError } from "../helpers";
 
@@ -18,7 +19,7 @@ const getLatestTotalScore = ({ id }) =>
     },
   });
 
-const saveWorkout = (user, workout) =>
+const saveWorkout = (user, workout, imageUrl) =>
   prisma.fitness_workout_log.create({
     data: {
       fitness_userId: user.id,
@@ -27,6 +28,7 @@ const saveWorkout = (user, workout) =>
       minutes: Number(workout.minutes),
       score: calculateScore(workout),
       type: workout.name,
+      imageUrl,
     },
     select: {
       id: true,
@@ -57,16 +59,34 @@ const rollbackWorkout = ({ id }) =>
   });
 
 const handler = async (req, res) => {
-  let latestTotalScore, savedWorkout, updatedUser;
+  let latestTotalScore, savedWorkout, updatedUser, imageUrl;
 
   if (req.method !== "POST") {
-    return res.status(400);
+    return res.status(400).json({ error: true });
   }
 
-  const { workout, user } = req.body;
+  const { workout, encodedImage, user } = req.body;
 
   if (!authUser(user, req).verifiedUser) {
     return unableToVerify(res);
+  }
+
+  if (encodedImage) {
+    try {
+      ({ secure_url: imageUrl } = await cloudinary.v2.uploader.upload(
+        encodedImage,
+        {
+          upload_preset: "fitness_challenge_workouts",
+        }
+      ));
+    } catch (err) {
+      console.error(
+        `Error: An error occurred while uploading the file to cloudinary.`,
+        err
+      );
+
+      return genericError(res);
+    }
   }
 
   try {
@@ -80,7 +100,7 @@ const handler = async (req, res) => {
   }
 
   try {
-    savedWorkout = await saveWorkout(user, workout);
+    savedWorkout = await saveWorkout(user, workout, imageUrl);
   } catch {
     console.error(
       `Error: An error occurred during the workout creation process for user (userId: ${user.id}).`
@@ -123,6 +143,14 @@ const handler = async (req, res) => {
     updatedUser,
     addedWorkout: { id: savedWorkout.id },
   });
+};
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "4mb",
+    },
+  },
 };
 
 export default handler;

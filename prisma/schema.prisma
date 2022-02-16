@@ -29,9 +29,9 @@ model fitness_workout_log {
   minutes        Int                       @db.Int
   score          Int                       @db.Int
   type           String                    @db.VarChar(256)
+  imageUrl       String?                   @db.VarChar(256)
   totalLikes     Int                       @default(0) @db.Int
   user           fitness_user              @relation(fields: [fitness_userId], references: [id])
-  image          fitness_workout_image?
   comments       fitness_workout_comment[]
   likes          fitness_workout_likes[]
   fitness_userId String
@@ -44,14 +44,6 @@ model fitness_workout_suggestions {
   type           String       @db.VarChar(256)
   user           fitness_user @relation(fields: [fitness_userId], references: [id])
   fitness_userId String
-}
-
-model fitness_workout_image {
-  id                   String              @id @default(uuid())
-  imageUrl             String              @db.VarChar(256)
-  caption              String              @db.LongText
-  workout              fitness_workout_log @relation(fields: [fitness_workoutLogId], references: [id])
-  fitness_workoutLogId String
 }
 
 model fitness_workout_comment {

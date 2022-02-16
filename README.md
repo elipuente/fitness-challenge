@@ -20,3 +20,4 @@ $ npm run dev
 - [Prisma](https://prisma.io/)
 - [Vercel](https://vercel.com)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Cloudinary](https://cloudinary.com/)
