@@ -8,6 +8,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import LoadingSpinnerWhite from "../LoadingSpinnerWhite";
 import { useUser } from "../../utils/user";
 import { WORKOUTS } from "../../enums/workoutTypes";
+import AddImage from "./AddImage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -20,9 +21,10 @@ const AddWorkoutForm = () => {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [encodedImage, setEncodedImage] = useState("");
   const [selectedWorkout, setSelectedWorkout] = useState("");
 
-  const handleSignInRequest = async ({ minutes, description }) => {
+  const handleAddWorkoutRequest = async ({ minutes, description }) => {
     setError("");
     if (!selectedWorkout) {
       setError("Please select a workout.");
@@ -39,6 +41,7 @@ const AddWorkoutForm = () => {
       },
       body: JSON.stringify({
         workout: { ...selectedWorkout, minutes, description },
+        encodedImage,
         user,
       }),
     }).then((data) => data.json());
@@ -65,7 +68,7 @@ const AddWorkoutForm = () => {
       <div className="mb-6 p-4">
         <form
           className="mt-8 space-y-4"
-          onSubmit={handleSubmit(handleSignInRequest)}
+          onSubmit={handleSubmit(handleAddWorkoutRequest)}
           method="POST"
         >
           <div className="rounded-md shadow-sm">
@@ -209,7 +212,8 @@ const AddWorkoutForm = () => {
             </div>
           </div>
           <p className="text-red-400">{error}</p>
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <AddImage setEncodedImage={setEncodedImage} loading={loading} />
             <button
               type="submit"
               disabled={loading}

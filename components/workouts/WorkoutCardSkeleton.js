@@ -20,6 +20,9 @@ const WorkoutCardSkeleton = () => (
           <div className="inline-block h-4 bg-gray-300 w-8 animate-pulse rounded-md" />
         </div>
       </div>
+      <div className="flex flex-row justify-center">
+        <div className="flex flex-row h-72 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
+      </div>
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
