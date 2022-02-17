@@ -4,7 +4,7 @@ import { setCookie, parseCookie } from "../../../utils/cookie";
 
 const createUsername = (first, last) => first.concat(last).toLowerCase();
 
-const getUserByIdAndNumber = (prisma, id, phoneNumber) =>
+const getUserByIdAndNumber = (id, phoneNumber) =>
   prisma.fitness_user.findMany({
     where: {
       AND: [
@@ -45,7 +45,6 @@ const handler = async (req, res) => {
   }
 
   const [user] = await getUserByIdAndNumber(
-    prisma,
     userInformation.id,
     userInformation.ph
   );

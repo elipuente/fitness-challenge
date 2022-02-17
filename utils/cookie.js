@@ -13,7 +13,7 @@ export const setCookie = (res, name, value, options = {}) => {
     ...options,
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
-    maxAge: 60 * 60 * 12,
+    maxAge: 60 * 60 * 24,
     path: "/api",
   };
 
@@ -24,4 +24,12 @@ export const parseCookie = (req) =>
   parse(req ? req.headers.cookie || "" : document.cookie);
 
 export const invalidateCookie = (res, name) =>
-  res.setHeader("Set-Cookie", serialize(name, "", { maxAge: 0 }));
+  res.setHeader(
+    "Set-Cookie",
+    serialize(name, "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 0,
+      path: "/api",
+    })
+  );

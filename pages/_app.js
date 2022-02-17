@@ -16,6 +16,15 @@ function FitnessCompetition({ Component, pageProps }) {
   const accessToken = getAccessToken();
 
   useEffect(() => {
+    fetch("/api/auth/refresh_token", { method: "POST" }).then(async (res) => {
+      const data = await res.json();
+
+      setAccessToken(data?.accessToken);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
     if (accessToken) {
       const { exp } = decodeAccessToken(accessToken);
 
@@ -28,9 +37,8 @@ function FitnessCompetition({ Component, pageProps }) {
           }
         );
       }
+      setLoading(false);
     }
-
-    setLoading(false);
   }, [accessToken]);
 
   if (loading) {

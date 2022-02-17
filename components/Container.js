@@ -10,7 +10,8 @@ const Container = (props) => {
 
   const meta = {
     title: "",
-    description: "",
+    description:
+      "The Puente Wedding Fitness Challenge website tracks users workouts and shows current leaderboard standings.",
     type: "website",
     ...customMeta,
   };
@@ -24,6 +25,7 @@ const Container = (props) => {
         <meta name="robots" content="follow, index" />
         <meta content={meta.description} name="description" />
         <link href="/favicons/favicon.ico" rel="shortcut icon" />
+        <link href="/manifest.json" rel="manifest" />
         <link
           href="/favicons/apple-touch-icon.png"
           rel="apple-touch-icon"
