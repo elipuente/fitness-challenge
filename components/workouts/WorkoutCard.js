@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ClockIcon, FireIcon } from "@heroicons/react/outline";
+import { ClockIcon, FireIcon, UploadIcon } from "@heroicons/react/outline";
 import WorkoutLikes from "./WorkoutLikes";
 
 const formatDate = (date) =>
@@ -53,11 +53,7 @@ const WorkoutCard = ({ workout, recentAdd }) => (
       <p className="text-gray-700 text-base">{workout.description}</p>
     </div>
     <div className="mt-4">
-      <WorkoutLikes
-        totalLikes={workout.totalLikes}
-        likes={workout.likes}
-        workoutId={workout.id}
-      />
+      <WorkoutLikes totalLikes={workout.totalLikes} workoutId={workout.id} />
     </div>
   </div>
 );

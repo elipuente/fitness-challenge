@@ -18,19 +18,6 @@ const getAllWorkoutsForUser = (id) =>
         id,
       },
     },
-    include: {
-      likes: {
-        select: {
-          id: true,
-          fitness_userId: true,
-          user: {
-            select: {
-              firstName: true,
-            },
-          },
-        },
-      },
-    },
     orderBy: {
       date: "desc",
     },

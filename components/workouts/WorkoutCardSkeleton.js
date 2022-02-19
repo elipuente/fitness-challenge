@@ -1,4 +1,6 @@
-import { ClockIcon, HeartIcon, FireIcon } from "@heroicons/react/outline";
+import { ClockIcon, FireIcon } from "@heroicons/react/outline";
+
+import WorkoutLikesSkeleton from "./WorkoutLikesSkeleton";
 
 const WorkoutCardSkeleton = () => (
   <>
@@ -26,10 +28,7 @@ const WorkoutCardSkeleton = () => (
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
       <div className="flex flex-row font-bold h-4 mb-2 bg-gray-200 animate-pulse w-full rounded-md" />
-      <div className="flex flex-row">
-        <HeartIcon className="flex-shrink-0 h-6 w-6 mr-1" />
-        <div className="flex flex-row font-bold h-5 mb-3 bg-gray-200 animate-pulse w-48 rounded-md" />
-      </div>
+      <WorkoutLikesSkeleton />
     </div>
   </>
 );

@@ -38,7 +38,7 @@ const Leaderboard = () => {
     return <Errors path={router.asPath} />;
   }
 
-  const userIsFirst = signedIn && data[0].phoneNumber === user.phoneNumber;
+  const userIsFirst = signedIn && data[0].id === user.id;
 
   return (
     <Container title="Leaderboard">

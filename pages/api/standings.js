@@ -10,6 +10,9 @@ const getCurrentStandings = (prisma) =>
       {
         firstName: "asc",
       },
+      {
+        lastName: "asc",
+      },
     ],
   });
 

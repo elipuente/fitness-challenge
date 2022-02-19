@@ -23,6 +23,7 @@ const Container = (props) => {
           {meta.title ? meta.title + " |" : ""} Puente Wedding Fitness Challenge
         </title>
         <meta name="robots" content="follow, index" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta content={meta.description} name="description" />
         <link href="/favicons/favicon.ico" rel="shortcut icon" />
