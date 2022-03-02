@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-import LoadingSpinnerWhite from "../LoadingSpinnerWhite";
-import { useUser } from "../../utils/user";
-import { WORKOUTS } from "../../enums/workoutTypes";
+import LoadingSpinnerWhite from "../../LoadingSpinnerWhite";
+import { useUser } from "../../../utils/user";
+import { getAccessToken } from "../../../utils/token";
+import { WORKOUTS } from "../../../enums/workoutTypes";
 import AddImage from "./AddImage";
 
 function classNames(...classes) {
@@ -18,6 +19,7 @@ const AddWorkoutForm = () => {
   const router = useRouter();
   const { user, setUser } = useUser();
   const { register, handleSubmit } = useForm();
+  const accessToken = getAccessToken();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +40,7 @@ const AddWorkoutForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
         workout: { ...selectedWorkout, minutes, description },
