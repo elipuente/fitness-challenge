@@ -1,21 +1,23 @@
-import { verifyRefreshToken } from "../../utils/token";
-import { parseCookie } from "../../utils/cookie";
+import { verifyAccessToken } from "../../utils/token";
+
+const getTokenFromHeaders = (req) =>
+  req?.headers?.authorization?.split(" ")?.[1];
 
 export const authUser = (user, req) => {
-  let userToken;
-  const { __rfx: token } = parseCookie(req);
+  let token;
+  const accessToken = getTokenFromHeaders(req);
 
-  if (!token) {
+  if (!accessToken) {
     return { verifiedUser: false };
   }
 
   try {
-    userToken = verifyRefreshToken(token);
+    token = verifyAccessToken(accessToken);
   } catch {
     return { verifiedUser: false };
   }
 
-  if (!(user.id === userToken.id && user.phoneNumber === userToken.ph)) {
+  if (!(user.id === token.id && user.phoneNumber === token.phoneNumber)) {
     return { verifiedUser: false };
   }
 

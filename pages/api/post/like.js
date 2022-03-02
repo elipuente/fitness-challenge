@@ -1,5 +1,4 @@
 import { unableToVerify } from "../helpers";
-
 import { authUser } from "../../../services/auth/auth-service";
 import {
   likeWorkout,
