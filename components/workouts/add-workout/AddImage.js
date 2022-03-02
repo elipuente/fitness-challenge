@@ -2,7 +2,7 @@ import { useState } from "react";
 import Compressor from "compressorjs";
 
 import { CameraIcon, CheckCircleIcon } from "@heroicons/react/outline";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../../LoadingSpinner";
 
 const AddImage = ({ setEncodedImage, loading }) => {
   const [addedImage, setAddedImage] = useState(false);
@@ -66,7 +66,7 @@ const AddImage = ({ setEncodedImage, loading }) => {
         ) : (
           <>
             <CameraIcon className="h-6 w-6 mr-1" />
-            <p>Add an image</p>
+            <p>Add image</p>
           </>
         )}
       </label>

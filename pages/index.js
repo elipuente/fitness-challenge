@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import bikingInCabo from "../public/images/biking-in-cabo.webp";
 import Container from "../components/Container";
+import RecentWorkouts from "../components/workouts/RecentWorkouts";
 import { useUser } from "../utils/user";
 
 const Home = () => {
@@ -66,6 +67,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <RecentWorkouts limit={9} />
     </Container>
   );
 };

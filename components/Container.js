@@ -24,7 +24,16 @@ const Container = (props) => {
         </title>
         <meta name="robots" content="follow, index" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: dark)"
+          content="#000000"
+        />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="#fff7ed"
+        />
         <meta content={meta.description} name="description" />
         <link href="/favicons/favicon.ico" rel="shortcut icon" />
         <link href="/manifest.json" rel="manifest" />

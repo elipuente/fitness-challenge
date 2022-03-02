@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import Container from "../../../../components/Container";
-import AddWorkoutForm from "../../../../components/workouts/AddWorkoutForm";
+import AddWorkoutForm from "../../../../components/workouts/add-workout/AddWorkoutForm";
 import { useUser } from "../../../../utils/user";
 
 const Add = () => {

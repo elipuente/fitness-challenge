@@ -20,7 +20,7 @@ const Workouts = () => {
   if (!data) {
     return (
       <Container title={`Loading Workouts`}>
-        <div className="flex flex-col justify-center mt-10 px-4 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
+        <div className="flex flex-col justify-center mt-10 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
           <div className="text-left justify-start">
             <h1 className="font-extrabold text-emerald-600 text-5xl tracking-tight block xl:inline sm:text-6xl md:text-7xl">
               {isSignedInUser ? (
@@ -55,11 +55,14 @@ const Workouts = () => {
 
   const isSignedInUser = signedIn && id === user.id;
 
-  const { firstName, totalScore, workouts } = data;
+  const {
+    user: { firstName, totalScore },
+    workouts,
+  } = data;
 
   return (
     <Container title={`${firstName}'s Workouts`}>
-      <div className="flex flex-col justify-center mt-10 px-4 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
+      <div className="flex flex-col justify-center mt-10 sm:mt-12 sm:px-6 lg:mt-20 lg:px-8 my-6 mb-56 h-auto">
         <div className="text-left justify-start">
           <h1 className="font-extrabold text-emerald-600 text-5xl tracking-tight block xl:inline sm:text-6xl md:text-7xl">
             {isSignedInUser ? "Your" : `${firstName}'s`} Workouts
@@ -72,6 +75,7 @@ const Workouts = () => {
               {workouts.map((workout, index) => (
                 <WorkoutCard
                   workout={workout}
+                  user={data.user}
                   recentAdd={addedWorkout === workout.id}
                   key={index}
                 />

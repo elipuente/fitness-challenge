@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { HeartIcon, ExclamationCircleIcon } from "@heroicons/react/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/solid";
 
-import { useUser } from "../../utils/user";
-import { fetcher } from "../../utils/fetcher";
 import WorkoutLikesSkeleton from "./WorkoutLikesSkeleton";
+import Modal from "./LikesModal";
+import { useUser } from "../../../utils/user";
+import { fetcher } from "../../../utils/fetcher";
+import { getAccessToken } from "../../../utils/token";
 
 const totalLikeText = (userLikedWorkout, likes, matchingUserLike) => {
   if (!likes && userLikedWorkout) {
@@ -37,7 +39,7 @@ const totalLikeText = (userLikedWorkout, likes, matchingUserLike) => {
     default: {
       return userLikedWorkout
         ? `You, ${names[0]} and others...`
-        : `${names[0]}, ${names[1]} and others...`;
+        : `${names[0]}, ${names[1]} and ${names.slice(2).length} others...`;
     }
   }
 };
@@ -49,6 +51,8 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
   const [userLikedWorkout, setUserLikedWorkout] = useState(false);
   const [loading, setLoading] = useState(false);
   const [matchingUserLike, setMatchingUserLike] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const accessToken = getAccessToken();
 
   const { data, error } = useSWR(
     loadLikes ? `/api/likes?workoutId=${workoutId}` : null,
@@ -85,6 +89,7 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
           workoutId,
@@ -116,6 +121,7 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
         workoutId,
@@ -149,16 +155,18 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
         </button>
       )}{" "}
       <p className="text-sm text-gray-900">
-        {data?.likes.length || userLikedWorkout
-          ? `Liked by ${totalLikeText(
-              userLikedWorkout,
-              data?.likes,
-              matchingUserLike
-            )}`
-          : signedIn
-          ? "Be the first to like this workout"
-          : "Sign in to like this workout"}
+        {data?.likes.length || userLikedWorkout ? (
+          <a className="cursor-pointer" onClick={() => setOpenModal(true)}>
+            Liked by{" "}
+            {totalLikeText(userLikedWorkout, data?.likes, matchingUserLike)}
+          </a>
+        ) : signedIn ? (
+          "Be the first to like this workout"
+        ) : (
+          "Sign in to like this workout"
+        )}
       </p>
+      <Modal open={openModal} setOpen={setOpenModal} likes={data?.likes} />
     </div>
   );
 };

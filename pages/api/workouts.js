@@ -1,4 +1,5 @@
 import prisma from "../../lib/prisma";
+import { genericError } from "./helpers";
 
 const verifyUser = (id) =>
   prisma.fitness_user.findUnique({
@@ -7,6 +8,7 @@ const verifyUser = (id) =>
     },
     select: {
       firstName: true,
+      lastName: true,
       totalScore: true,
     },
   });
@@ -23,13 +25,45 @@ const getAllWorkoutsForUser = (id) =>
     },
   });
 
+const getWorkouts = (limit) =>
+  prisma.fitness_workout_log.findMany({
+    include: {
+      user: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+    take: limit,
+  });
+
 const handler = async (req, res) => {
-  const { user: id } = req.query;
+  let workouts;
+  const { user: id, limit } = req.query;
 
   if (!id) {
     return res
       .status(500)
       .json({ error: true, message: "No user information provided." });
+  }
+
+  if (id === "all") {
+    try {
+      workouts = await getWorkouts(parseInt(limit) ?? 1);
+    } catch (err) {
+      console.error(
+        `Error: An error occurred while fetching the latest 10 workouts.`,
+        err
+      );
+
+      return genericError(res);
+    }
+
+    return res.status(200).json({ workouts });
   }
 
   const user = await verifyUser(id);
@@ -38,11 +72,9 @@ const handler = async (req, res) => {
     return res.status(404).json({ error: true, message: "User not found." });
   }
 
-  const { firstName, totalScore } = user;
+  workouts = await getAllWorkoutsForUser(id);
 
-  const workouts = await getAllWorkoutsForUser(id);
-
-  return res.status(200).json({ firstName, totalScore, workouts });
+  return res.status(200).json({ user, workouts });
 };
 
 export default handler;
