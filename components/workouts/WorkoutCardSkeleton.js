@@ -1,10 +1,11 @@
 import { ClockIcon, FireIcon } from "@heroicons/react/outline";
 
-import WorkoutLikesSkeleton from "./WorkoutLikesSkeleton";
+import WorkoutLikesSkeleton from "./likes/WorkoutLikesSkeleton";
 
 const WorkoutCardSkeleton = () => (
   <>
     <div className="flex flex-col justify-between rounded shadow-lg bg-white px-4 py-4 animate-pulse-sm">
+      <div className="font-bold h-3 mb-3 bg-gray-200 animate-pulse w-20 rounded-md" />
       <div className="flex flex-row font-bold h-5 mb-3 justify-between items-center">
         <div className="flex flex-row font-bold h-5 mb-3 bg-gray-200 animate-pulse w-32 rounded-md" />
         <div className="flex flex-row font-bold h-5 mb-3 bg-gray-200 animate-pulse w-20 rounded-md" />
