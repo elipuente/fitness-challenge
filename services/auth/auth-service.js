@@ -36,7 +36,13 @@ export const authUser = (user, req) => {
     }
   }
 
-  if (!(user.id === token.id && user.phoneNumber === token.phoneNumber)) {
+  if (
+    !(
+      user.id === token.id &&
+      (user.phoneNumber === token?.phoneNumber ||
+        user.phoneNumber === token?.ph)
+    )
+  ) {
     console.error(
       `Error: An error occurred while validating user information for ${user.firstName} ${user.lastName} (userId: ${user.id}).`
     );
