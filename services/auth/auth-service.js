@@ -1,4 +1,7 @@
-import { verifyAccessToken } from "../../utils/token";
+import { verifyAccessToken, verifyRefreshToken } from "../../utils/token";
+import { parseCookie } from "../../utils/cookie";
+
+const UNABLE_TO_VERIFY_USER = { verifiedUser: false };
 
 const getTokenFromHeaders = (req) =>
   req?.headers?.authorization?.split(" ")?.[1];
@@ -8,7 +11,7 @@ export const authUser = (user, req) => {
   const accessToken = getTokenFromHeaders(req);
 
   if (!accessToken) {
-    return { verifiedUser: false };
+    return UNABLE_TO_VERIFY_USER;
   }
 
   try {
@@ -19,14 +22,25 @@ export const authUser = (user, req) => {
       err,
       accessToken
     );
-    return { verifiedUser: false };
+
+    const { __rfx: refreshToken } = parseCookie(req);
+
+    if (!refreshToken) {
+      return UNABLE_TO_VERIFY_USER;
+    }
+
+    token = verifyRefreshToken(refreshToken);
+
+    if (!token) {
+      return UNABLE_TO_VERIFY_USER;
+    }
   }
 
   if (!(user.id === token.id && user.phoneNumber === token.phoneNumber)) {
     console.error(
       `Error: An error occurred while validating user information for ${user.firstName} ${user.lastName} (userId: ${user.id}).`
     );
-    return { verifiedUser: false };
+    return UNABLE_TO_VERIFY_USER;
   }
 
   return {

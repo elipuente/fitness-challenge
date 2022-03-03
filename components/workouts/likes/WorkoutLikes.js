@@ -20,9 +20,7 @@ const totalLikeText = (userLikedWorkout, likes, matchingUserLike) => {
     likes = likes.filter(({ id }) => id !== matchingUserLike[0].id);
   }
 
-  const names = likes.map(
-    ({ user }) => `${user.firstName} ${user.lastName.charAt(0)}`
-  );
+  const names = likes.map(({ user }) => `${user.firstName}`);
 
   switch (userLikedWorkout ? names.length + 1 : names.length) {
     case 1: {
