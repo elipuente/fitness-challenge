@@ -36,7 +36,7 @@ const totalLikeText = (userLikedWorkout, likes, matchingUserLike) => {
     }
     default: {
       return userLikedWorkout
-        ? `You, ${names[0]} and others...`
+        ? `You, ${names[0]} and ${names.slice(2).length} others...`
         : `${names[0]}, ${names[1]} and ${names.slice(2).length} others...`;
     }
   }
