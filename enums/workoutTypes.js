@@ -32,6 +32,10 @@ export const WORKOUTS = [
     ppmValue: 0.25,
   },
   {
+    name: "Tennis",
+    ppmValue: 0.75,
+  },
+  {
     name: "Other",
     ppmValue: 0.75,
   },
