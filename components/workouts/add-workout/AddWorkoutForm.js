@@ -113,7 +113,7 @@ const AddWorkoutForm = () => {
                         leaveTo="opacity-0"
                       >
                         <Listbox.Options
-                          className="absolute z-10 mt-1 w-[75vw] sm:w-full bg-white shadow-lg sm:max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                          className="absolute z-10 mt-1 w-[75vw] max-h-56 sm:w-full bg-white shadow-lg rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                           aria-required="true"
                         >
                           {WORKOUTS.map((workout) => (
