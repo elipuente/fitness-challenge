@@ -5,7 +5,7 @@ const LeaderTable = ({ data }) => {
   return (
     <div className="flex flex-row justify-center mt-12 lg:mt-0">
       <div className="inline-block sm:px-6 lg:pl-8">
-        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-gray-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-gray-300 scrollbar-track:!rounded max-h-96 supports-scrollbars:pr-2">
+        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-gray-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-gray-300 scrollbar-track:!rounded sm:max-h-96 supports-scrollbars:pr-2">
           <table className="divide-gray-200 w-full border-collapse text-center whitespace-normal">
             <thead className="bg-gray-50 overflow-auto flex w-[95vw] lg:w-[45vw] ">
               <tr className="flex justify-center w-full my-4">

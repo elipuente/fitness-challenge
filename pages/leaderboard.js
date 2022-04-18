@@ -8,6 +8,8 @@ import LeaderTable from "../components/leaderboard/LeaderTable";
 import { fetcher } from "../utils/fetcher";
 import { useUser } from "../utils/user";
 
+import { sessionOneWinners } from "../data/sessionWinners";
+
 const Leaderboard = () => {
   const router = useRouter();
   const { user, signedIn } = useUser();
@@ -72,6 +74,20 @@ const Leaderboard = () => {
           </p>
         </div>
         <LeaderTable data={data} />
+      </div>
+      <div className="flex flex-col lg:flex-row justify-center px-4 lg:px-8 my-6 mb-20 h-auto text-center">
+        <div className="justify-start">
+          <h1 className="font-extrabold text-emerald-600 text-5xl tracking-tight block xl:inline sm:text-6xl md:text-7xl">
+            Previous Winners
+          </h1>
+          <h1 className="font-extrabold block text-2xl md:text-3xl text-gray-900">
+            Top Leaders from Previous Sessions
+          </h1>
+          <p className="my-3 text-base text-gray-500 sm:my-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0">
+            Congrats to the winners of Session One!
+          </p>
+          <LeaderTable data={sessionOneWinners} />
+        </div>
       </div>
     </Container>
   );
