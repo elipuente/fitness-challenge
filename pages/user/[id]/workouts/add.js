@@ -37,6 +37,9 @@ const Add = () => {
           Add a workout to increase your score! Your current score is{" "}
           {user.totalScore}.
         </p>
+        <p className="text-gray-800 text-lg md:text-xl font-bold italic">
+          Session two begins tomorrow.
+        </p>
         {sessionOneEnd >= 0 && (
           <p className="text-gray-800 text-lg md:text-xl font-bold italic">
             Session one ends{" "}
