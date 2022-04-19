@@ -4,18 +4,10 @@ import Container from "../../../../components/Container";
 import AddWorkoutForm from "../../../../components/workouts/add-workout/AddWorkoutForm";
 import { useUser } from "../../../../utils/user";
 
-const getSessionOneEnd = () =>
-  Math.ceil(
-    (new Date(2022, 3, 17).getTime() - new Date().getTime()) /
-      (1000 * 3600 * 24)
-  ).toString();
-
 const Add = () => {
   const router = useRouter();
   const { id } = router.query;
   const { user, signedIn } = useUser();
-
-  const sessionOneEnd = getSessionOneEnd();
 
   if (!signedIn) {
     router.push("/401");
@@ -37,21 +29,6 @@ const Add = () => {
           Add a workout to increase your score! Your current score is{" "}
           {user.totalScore}.
         </p>
-        <p className="text-gray-800 text-lg md:text-xl font-bold italic">
-          Session two begins tomorrow.
-        </p>
-        {sessionOneEnd >= 0 && (
-          <p className="text-gray-800 text-lg md:text-xl font-bold italic">
-            Session one ends{" "}
-            {sessionOneEnd === "0"
-              ? "today"
-              : sessionOneEnd === "1"
-              ? "tomorrow"
-              : `in ${sessionOneEnd} days`}
-            !
-          </p>
-        )}
-
         <AddWorkoutForm />
       </div>
     </Container>

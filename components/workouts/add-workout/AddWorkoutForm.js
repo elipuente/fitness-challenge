@@ -219,7 +219,7 @@ const AddWorkoutForm = () => {
             <AddImage setEncodedImage={setEncodedImage} loading={loading} />
             <button
               type="submit"
-              disabled={true}
+              disabled={loading}
               className="group relative flex justify-end py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
             >
               <span className="absolute inset-y-0 flex items-center pl-3"></span>
@@ -228,7 +228,7 @@ const AddWorkoutForm = () => {
                   <LoadingSpinnerWhite /> {"Adding Workout..."}
                 </>
               ) : (
-                "Starts Tomorrow"
+                "Add Workout"
               )}
             </button>
           </div>
