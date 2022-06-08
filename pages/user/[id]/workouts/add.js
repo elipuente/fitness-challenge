@@ -4,11 +4,11 @@ import Container from "../../../../components/Container";
 import AddWorkoutForm from "../../../../components/workouts/add-workout/AddWorkoutForm";
 import { useUser } from "../../../../utils/user";
 
-const getSessionTwoEnd = () => {
+const getSessionTwoEnd = () =>
   Math.ceil(
-    (new Date(2022, 6, 14).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+    (new Date(2022, 5, 14).getTime() - new Date().getTime()) /
+      (1000 * 60 * 60 * 24)
   ).toString();
-};
 
 const Add = () => {
   const router = useRouter();
