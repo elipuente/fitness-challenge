@@ -18,3 +18,24 @@ export const sessionOneWinners = [
     totalScore: 1721,
   },
 ];
+
+export const sessionTwoWinners = [
+  {
+    firstName: "Andrew",
+    id: "929688a3-79aa-4298-a651-1a7bf825aeb5",
+    lastName: "Puente",
+    totalScore: 3114,
+  },
+  {
+    firstName: "Hannah",
+    id: "d7feb648-fe6d-4864-9e91-4c47ae962942",
+    lastName: "Hentges",
+    totalScore: 2309,
+  },
+  {
+    firstName: "Adam",
+    id: "dd2a53da-aae1-4376-925a-f0dd1fa15391",
+    lastName: "Besse",
+    totalScore: 1711,
+  },
+];

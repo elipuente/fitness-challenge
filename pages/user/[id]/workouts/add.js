@@ -4,18 +4,20 @@ import Container from "../../../../components/Container";
 import AddWorkoutForm from "../../../../components/workouts/add-workout/AddWorkoutForm";
 import { useUser } from "../../../../utils/user";
 
-const getSessionTwoEnd = () =>
+const getSessionThreeEnd = () =>
   Math.ceil(
-    (new Date(2022, 5, 14).getTime() - new Date().getTime()) /
+    (new Date(2022, 7, 10).getTime() - new Date().getTime()) /
       (1000 * 60 * 60 * 24)
-  ).toString();
+  );
 
 const Add = () => {
   const router = useRouter();
   const { id } = router.query;
   const { user, signedIn } = useUser();
 
-  const sessionTwoEnd = getSessionTwoEnd();
+  const sessionThreeEnd = getSessionThreeEnd();
+  const withinTenDaysOfSessionEnd =
+    10 >= sessionThreeEnd && sessionThreeEnd >= 0;
 
   if (!signedIn) {
     router.push("/401");
@@ -37,14 +39,14 @@ const Add = () => {
           Add a workout to increase your score! Your current score is{" "}
           {user.totalScore}.
         </p>
-        {sessionTwoEnd >= 0 && (
+        {withinTenDaysOfSessionEnd && (
           <p className="text-gray-800 text-lg md:text-xl font-bold italic">
-            Session two ends{" "}
-            {sessionTwoEnd === "0"
+            Session three ends{" "}
+            {sessionThreeEnd === 0
               ? "today"
-              : sessionTwoEnd === "1"
+              : sessionThreeEnd === 1
               ? "tomorrow"
-              : `in ${sessionTwoEnd} days`}
+              : `in ${sessionThreeEnd.toString()} days`}
             !
           </p>
         )}

@@ -24,10 +24,13 @@ const Home = () => {
                     user.totalScore
                   }. ${
                     user.totalScore
-                      ? "Increase your standings by adding another workout."
+                      ? "Increase your standing by adding another workout."
                       : "Get started by adding a workout!"
                   }`
                 : "Welcome to the Puente Wedding Fitness Challenge. Sign in to start competing! The three users with the highest scores will win the buy-in!"}
+            </p>
+            <p className="my-3 text-gray-500 sm:mt-2 text-lg sm:max-w-xl sm:mx-auto md:mt-4 md:text-xl lg:mx-0">
+              This is the final round before our wedding! Give it all you got!
             </p>
             <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">
