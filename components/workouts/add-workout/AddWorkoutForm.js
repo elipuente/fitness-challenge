@@ -220,7 +220,7 @@ const AddWorkoutForm = () => {
               />
             </div>
           </div>
-          <p className="text-red-400">{error}</p>
+          <p className="text-red-400 text-sm sm:text-base">{error}</p>
           {selectedWorkout.name === "HIIT" && (
             <p className="text-xs">
               HIIT workouts are meant to be short, high intensity workouts, and
