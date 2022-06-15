@@ -34,6 +34,12 @@ const AddWorkoutForm = () => {
       return;
     }
 
+    if (selectedWorkout.name === "HIIT" && minutes > 60) {
+      setError("HIIT workouts should take less than one hour.");
+
+      return;
+    }
+
     setLoading(true);
 
     const res = await fetch("/api/post/workout", {
@@ -215,6 +221,12 @@ const AddWorkoutForm = () => {
             </div>
           </div>
           <p className="text-red-400">{error}</p>
+          {selectedWorkout.name === "HIIT" && (
+            <p className="text-xs">
+              HIIT workouts are meant to be short, high intensity workouts, and
+              are weighted appropriately.
+            </p>
+          )}
           <div className="flex justify-between">
             <AddImage setEncodedImage={setEncodedImage} loading={loading} />
             <button
@@ -232,6 +244,9 @@ const AddWorkoutForm = () => {
               )}
             </button>
           </div>
+          {Math.random() > 0.9 && (
+            <p className="text-xs">Try adding a picture to your workout!</p>
+          )}
         </form>
       </div>
     </div>
