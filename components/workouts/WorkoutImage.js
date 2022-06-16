@@ -6,7 +6,7 @@ const WorkoutImage = ({ workout }) => {
 
   return (
     <div
-      className={`next-image-wrapper aspect-w-3 aspect-h-4 overflow-hidden rounded-lg transition ${
+      className={`aspect-w-3 aspect-h-4 overflow-hidden rounded-lg transition ${
         imageLoading ? "bg-gray-200" : "bg-gray-800"
       }`}
     >
