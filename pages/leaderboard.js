@@ -83,7 +83,7 @@ const Leaderboard = () => {
           <h1 className="font-extrabold block text-2xl md:text-3xl text-gray-900">
             Top Leaders from Previous Sessions
           </h1>
-          <div className="flex flex-col sm:flex-row sm:justify-between">
+          <div className="flex flex-col lg:flex-row lg:justify-between">
             <div className="mb-4">
               <p className="-mb-12 sm:mb-4 mt-10 text-base text-gray-500 sm:text-lg md:text-xl lg:mx-0">
                 Session One Winners!

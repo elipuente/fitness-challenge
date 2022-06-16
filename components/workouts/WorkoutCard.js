@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { ClockIcon, FireIcon } from "@heroicons/react/outline";
+import WorkoutImage from "./WorkoutImage";
 import WorkoutLikes from "./likes/WorkoutLikes";
 
 const formatDate = (date) =>
@@ -46,19 +46,7 @@ const WorkoutCard = ({ workout, user, recentAdd, linkToWorkouts }) => (
           {workout.score}
         </div>
       </div>
-      {workout.imageUrl && (
-        <div className="flex flex-row justify-center pb-2">
-          <Image
-            src={workout.imageUrl}
-            alt={`${workout.type} workout picture taken on ${workout.date}`}
-            className="rounded-lg"
-            height={400}
-            width={300}
-            placeholder="blur"
-            blurDataURL={workout.imageUrl}
-          />
-        </div>
-      )}
+      {workout.imageUrl && <WorkoutImage workout={workout} />}
       <p className="text-gray-700 text-base">{workout.description}</p>
     </div>
     <div className="mt-4">
